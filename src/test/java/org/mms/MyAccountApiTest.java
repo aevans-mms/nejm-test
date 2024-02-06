@@ -16,7 +16,8 @@ public class MyAccountApiTest {
 	@Test
 	public void getCustomerByEmail() {
 
-		String url = "https://api.nejm-dev.org/my-account/v1/api/customers?email=aevans.dev.20240202@nejmemail.com";
+		String emailAddress = "testuser@nejmemail.com";
+		String url = "https://api.nejm-dev.org/my-account/v1/api/customers?email=" + emailAddress;
 
 		String body = RestAssured.given()
 				.header("client_id", client_id)
@@ -34,13 +35,13 @@ public class MyAccountApiTest {
 	@Test
 	public void getCustomerByEmail2() {
 
+		String emailAddress = "testuser@nejmemail.com";
 		String url = "https://api.nejm-dev.org/my-account/v1/api/customers";
-		String email = "aevans.dev.20240202@nejmemail.com";
 
 		RequestSpecification request = RestAssured.given();
 		request.header("client_id", client_id);
 		request.header("client_secret", client_secret);
-		request.queryParam("email", email);
+		request.queryParam("email", emailAddress);
 
 		Response response = request.get(url);
 		int statusCode = response.getStatusCode();
